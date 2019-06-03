@@ -33,4 +33,4 @@ RUN rm -r "$CONDA_DIR/pkgs/" && \
     mkdir -p "$CONDA_DIR/locks" && \
     chmod 777 "$CONDA_DIR/locks"
 
-CMD ["/bin/zsh"]
+CMD ["/bin/bash"]

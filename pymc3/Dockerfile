@@ -25,6 +25,7 @@ RUN conda install pymc3 --yes && \
     conda install arviz --yes && \
     conda install ipython --yes && \
     conda install jupyter --yes && \
+    conda install seaborn --yes && \
     conda install mkl-service --yes
 
 # Clean all dowladed packages to free space: 

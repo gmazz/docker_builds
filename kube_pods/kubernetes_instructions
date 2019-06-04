@@ -1,0 +1,35 @@
+1. Prepare file.yaml
+2. From GitLab reate a new project, create registry (left corner)
+3. Run docker associated with the registry on the folder with the Dockerfile of interest
+e.g.    $ cd pymc3
+	$ docker build -t registry.ardigen.com/giovanni.mazzocco/gio_data_analysis .
+
+4. Push the project on gitlab
+	$ docker push registry.ardigen.com/giovanni.mazzocco/gio_data_analysis
+
+5. Edit the image adress on the file.yaml
+
+6. run kubernetes with the file.yaml
+	e.g. $ kubectl create -f ppl_pod.yaml
+
+7. Once the pod is created (e.g. pod/ppl-pod created) you can connect with the following command:
+	$ kubectl exec -it ppl-pod /bin/bash
+
+
+################ Here a list of useful commands:
+
+List all pods in namespace 
+
+     $ kubectl get pods
+Create pods
+
+     $ kubectl create -f pod.yaml
+Describe your pod ( this is very usefull when something is wrong with your pod )
+
+     $ kubectl describe pods podname   
+Delete pod
+
+     $ kubectl delete pods podname
+Get into pod
+
+     $ kubectl exec -it podname /bin/bash	

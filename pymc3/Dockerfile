@@ -2,6 +2,8 @@ FROM frolvlad/alpine-glibc:alpine-3.9
 ENV CONDA_DIR="/opt/conda"
 ENV PATH="$CONDA_DIR/bin:$PATH"
 
+USER root 
+
 # Install conda
 RUN CONDA_VERSION="latest" && \
     CONDA_MD5_CHECKSUM="718259965f234088d785cad1fbd7de03" && \
@@ -25,7 +27,8 @@ RUN conda install pymc3 --yes && \
     conda install ipython --yes && \
     conda install jupyter --yes && \
     conda install seaborn --yes && \
-    conda install mkl-service --yes
+    conda install mkl-service --yes && \
+    conda install jupyterlab --yes
 
 # Clean all dowladed packages to free space: 
 RUN rm -r "$CONDA_DIR/pkgs/" && \

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-jupyter-project
+  namespace: ardigen
+spec:
+  containers:
+    - name: jupyter
+      image: registry.ardigen.com/giovanni.mazzocco/gio_data_analysis:latest
+      ports:
+        - containerPort: 8888
+      env:
+        - name: NB_USER
+          value: "jupyter"
+        - name: NB_GID
+          value: "1001"
+        - name: NB_UID
+          value: "1001"
+        - name: GRANT_SUDO
+          value: "yes"
+        - name: CHOWN_HOME
+          value: "yes"
+      volumeMounts:
+        - name: storage
+          mountPath: "/home/jupyter"
+          subPath: "my-jupyter-project"
+  imagePullSecrets:
+    - name: gitlab
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: pvc-ardstorage1

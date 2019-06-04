@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ppl-pod
+  namespace: ardigen
+  labels:
+    name: cuda
+spec:
+  restartPolicy: OnFailure
+  volumes:
+    - name: pv-ard
+      persistentVolumeClaim:
+        claimName: pvc-ardstorage1
+  containers:
+  - name: ppl-pod
+    image: "registry.ardigen.com/giovanni.mazzocco/gio_data_analysis:latest"
+    command: ["sleep"]
+    args: ["1000"]
+    volumeMounts:
+    -  name: pv-ard
+       mountPath: /mnt/drago
+    ports:
+    - containerPort: 5901
+  imagePullSecrets:
+  - name: gitlab
+
+
